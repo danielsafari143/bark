@@ -20,7 +20,7 @@ public class UserTasks : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<List<User>> Get()
+    public async Task<List<User>> GetUser()
     {
         return await repository.GetUsersAsync();
     }
