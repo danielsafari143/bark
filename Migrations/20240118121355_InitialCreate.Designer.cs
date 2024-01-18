@@ -12,7 +12,7 @@ using UserTasks.db;
 namespace UserTasks.Migrations
 {
     [DbContext(typeof(UserTasksContext))]
-    [Migration("20240118120438_InitialCreate")]
+    [Migration("20240118121355_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

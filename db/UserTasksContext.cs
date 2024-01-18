@@ -9,7 +9,7 @@ public class UserTasksContext: DbContext {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
-            @"Server=(localdb)\mssqllocaldb;Database=UserTask;Trusted_Connection=True");
+            @"Server=sql.bsite.net\MSSQL2016 ;Database=UserTask;Username: safari_userTasks; Trusted_Connection=True");
     }
 
     public DbSet<User> users{get;set;}
