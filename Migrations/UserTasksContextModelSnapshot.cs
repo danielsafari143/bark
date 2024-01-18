@@ -35,21 +35,22 @@ namespace UserTasks.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
-                    b.Property<int?>("UserID")
-                        .IsRequired()
+                    b.Property<int>("UserID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("userTasks");
+                    b.ToTable("tasks");
                 });
 
             modelBuilder.Entity("UserTasks.Models.User.User", b =>

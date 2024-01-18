@@ -28,21 +28,21 @@ namespace UserTasks.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "userTasks",
+                name: "tasks",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     UserID = table.Column<int>(type: "integer", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_userTasks", x => x.ID);
+                    table.PrimaryKey("PK_tasks", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_userTasks_users_UserID",
+                        name: "FK_tasks_users_UserID",
                         column: x => x.UserID,
                         principalTable: "users",
                         principalColumn: "ID",
@@ -50,8 +50,8 @@ namespace UserTasks.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_userTasks_UserID",
-                table: "userTasks",
+                name: "IX_tasks_UserID",
+                table: "tasks",
                 column: "UserID");
         }
 
@@ -59,7 +59,7 @@ namespace UserTasks.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "userTasks");
+                name: "tasks");
 
             migrationBuilder.DropTable(
                 name: "users");

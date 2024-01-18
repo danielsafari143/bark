@@ -9,9 +9,10 @@ public class UserTasksContext: DbContext {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
-            @"Server=localhost;Port=5432;Database=task;Username=postgres;Password=safari");
+            @"Server=localhost;Port=5432;Database=TaskUser;Username=postgres;Password=safari");
     }
 
+    public DbSet<UserTask> tasks{get;set;}
     public DbSet<User> users{get;set;}
-    public DbSet<UserTask> userTasks{get;set;}
+    
 }
