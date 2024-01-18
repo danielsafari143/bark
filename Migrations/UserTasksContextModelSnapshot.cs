@@ -50,7 +50,7 @@ namespace UserTasks.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("tasks");
+                    b.ToTable("userTasks");
                 });
 
             modelBuilder.Entity("UserTasks.Models.User.User", b =>

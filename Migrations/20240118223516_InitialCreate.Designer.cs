@@ -12,7 +12,7 @@ using UserTasks.db;
 namespace UserTasks.Migrations
 {
     [DbContext(typeof(UserTasksContext))]
-    [Migration("20240118133422_InitialCreate")]
+    [Migration("20240118223516_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -53,7 +53,7 @@ namespace UserTasks.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("tasks");
+                    b.ToTable("userTasks");
                 });
 
             modelBuilder.Entity("UserTasks.Models.User.User", b =>

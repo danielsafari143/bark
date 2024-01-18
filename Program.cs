@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using password.hashedpassword;
+using UserTasks.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
 //jwt configuration 
@@ -31,6 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddDbContext<UserTasksContext>();
 builder.Services.AddTransient<TasksRepository>();
+builder.Services.AddTransient<UserRepository>();
 //
 builder.Services.AddTransient<HashedPassword>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
