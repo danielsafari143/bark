@@ -21,4 +21,16 @@ public class TasksRepository {
         context.users.Add(userDTO);
         await context.SaveChangesAsync();
     }
+
+    public async Task<User> GetUserAsync(string email){
+       try
+       {
+         return await context.users.SingleOrDefaultAsync(data => data.email == email);
+       }
+       catch (System.Exception e)
+       {
+        
+            throw e;
+       }
+    }
 }

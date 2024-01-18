@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using password.hashedpassword;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using UserTasks.tasksServices;
 
 namespace JwtInDotnetCore.Controllers
 {
@@ -13,30 +14,38 @@ namespace JwtInDotnetCore.Controllers
     {
         private IConfiguration _config;
         private HashedPassword password;
-        public LoginController(IConfiguration config , HashedPassword password) 
+        private readonly TasksRepository taskRepository;
+
+        public LoginController(IConfiguration config , HashedPassword password, TasksRepository tasksRepository) 
         {
             _config = config;
             this.password = password;
+            this.taskRepository = tasksRepository;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Post([FromBody] LoginRequest loginRequest)
         {
-            //your logic for login process
-            //If login usrename and password are correct then proceed to generate token
-            Console.WriteLine(password.hashedpassword("safari hamuli"));
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                var user = await taskRepository.GetUserAsync(loginRequest.Email);
+                bool check = password.Decode(user.Password, loginRequest.Password);
 
-            var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
-              null,
-              expires: DateTime.Now.AddHours(1),
-              signingCredentials: credentials);
+                if(check) {
+                    return null;
+                }
+                 
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token =  new JwtSecurityTokenHandler().WriteToken(Sectoken);
+                var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
+                _config["Jwt:Issuer"],
+                null,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: credentials);
 
-            return Ok(token);
+                var token =  new JwtSecurityTokenHandler().WriteToken(Sectoken);
+
+                return Ok(token);
+
         }
     }
 }

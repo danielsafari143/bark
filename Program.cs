@@ -32,7 +32,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<UserTasksContext>();
 builder.Services.AddTransient<TasksRepository>();
 //
-builder.Services.AddSingleton<HashedPassword>();
+builder.Services.AddTransient<HashedPassword>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -41,7 +41,7 @@ public class UserTasks : ControllerBase
             Password = hashedPassword.hashedpassword(userTDO.Password),
             email = userTDO.Email
         };
-
+        Console.WriteLine(hashedPassword.Decode(user.Password, userTDO.Password));
         await repository.CreateUserAsync(user);
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
     }
