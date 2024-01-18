@@ -28,7 +28,7 @@ namespace UserTasks.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "taskModels",
+                name: "userTasks",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
@@ -40,9 +40,9 @@ namespace UserTasks.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_taskModels", x => x.ID);
+                    table.PrimaryKey("PK_userTasks", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_taskModels_users_UserID",
+                        name: "FK_userTasks_users_UserID",
                         column: x => x.UserID,
                         principalTable: "users",
                         principalColumn: "ID",
@@ -50,8 +50,8 @@ namespace UserTasks.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_taskModels_UserID",
-                table: "taskModels",
+                name: "IX_userTasks_UserID",
+                table: "userTasks",
                 column: "UserID");
         }
 
@@ -59,7 +59,7 @@ namespace UserTasks.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "taskModels");
+                name: "userTasks");
 
             migrationBuilder.DropTable(
                 name: "users");

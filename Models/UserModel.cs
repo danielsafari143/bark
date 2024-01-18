@@ -16,5 +16,5 @@ public class User
     [PasswordPropertyText]
     public required string  Password {set;get;}
 
-    public ICollection<TaskModel> userTasks {get;} = new List<TaskModel>(); 
+    public ICollection<UserTask> userTasks {get;} = new List<UserTask>(); 
 }

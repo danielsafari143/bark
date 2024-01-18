@@ -12,7 +12,7 @@ using UserTasks.db;
 namespace UserTasks.Migrations
 {
     [DbContext(typeof(UserTasksContext))]
-    [Migration("20240118122822_InitialCreate")]
+    [Migration("20240118125403_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace UserTasks.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("UserTasks.Models.Tasks.TaskModel", b =>
+            modelBuilder.Entity("UserTasks.Models.Tasks.UserTask", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace UserTasks.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("taskModels");
+                    b.ToTable("userTasks");
                 });
 
             modelBuilder.Entity("UserTasks.Models.User.User", b =>
@@ -81,7 +81,7 @@ namespace UserTasks.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("UserTasks.Models.Tasks.TaskModel", b =>
+            modelBuilder.Entity("UserTasks.Models.Tasks.UserTask", b =>
                 {
                     b.HasOne("UserTasks.Models.User.User", null)
                         .WithMany("userTasks")
