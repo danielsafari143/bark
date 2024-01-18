@@ -18,13 +18,6 @@ public class TasksRepository {
     }
     
     public async Task CreateUserAsync(User userDTO) {
-        // var user = new User
-        // {
-        //     username = userDTO.Username,
-        //     Password = userDTO.Password,
-        //     email = userDTO.Email
-        // };
-
         context.users.Add(userDTO);
         await context.SaveChangesAsync();
     }
