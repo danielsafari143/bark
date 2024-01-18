@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jX6zUphjAaexIvd20Yqqzq1iw1y8tcHBEX8Qgj6KQJacO2fTcu0Q2eAjwGzQTroJ+D61UK3nGwL/b3+hgsXqXQ==",
+  "dgSpecHash": "9Qh+UNJYS1YQ66/NsvvAhJ9ciaxR6DdeSGKcySSo8a9Byc5h1jiAFWsueU84PRY98Bf+8jmHie0oiqtAxYVLqw==",
   "success": true,
   "projectFilePath": "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,8 @@
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\npgsql\\8.0.0\\npgsql.8.0.0.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.0\\npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

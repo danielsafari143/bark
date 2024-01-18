@@ -8,8 +8,8 @@ public class UserTasksContext: DbContext {
     public UserTasksContext(DbContextOptions options):base(options){}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=sql.bsite.net\MSSQL2016 ;Database=UserTask;Username: safari_userTasks; Trusted_Connection=True");
+        optionsBuilder.UseNpgsql(
+            @"Server=localhost;Port=5432;Database=postgres;Username=postgres;Password=safari");
     }
 
     public DbSet<User> users{get;set;}
