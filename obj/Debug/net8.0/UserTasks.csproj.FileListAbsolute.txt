@@ -137,3 +137,5 @@ C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAn
 C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\Npgsql.dll
 C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\LENOVO\it\c#\assess\UserTasks\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll

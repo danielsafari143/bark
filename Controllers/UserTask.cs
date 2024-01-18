@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using password.hashedpassword;
 using user.tdo;
 using UserTasks.Models.User;
 using UserTasks.tasksServices;
@@ -13,10 +14,12 @@ namespace UserTasks.Controllers;
 public class UserTasks : ControllerBase
 {
     private TasksRepository repository;
+    private HashedPassword hashedPassword;
 
-    public UserTasks(TasksRepository repository)
+    public UserTasks(TasksRepository repository , HashedPassword hashedPassword)
     {
         this.repository = repository;
+        this.hashedPassword = hashedPassword;
     }
 
     [HttpGet]
@@ -35,7 +38,7 @@ public class UserTasks : ControllerBase
          var user = new User
         {
             username = userTDO.Username,
-            Password = userTDO.Password,
+            Password = hashedPassword.hashedpassword(userTDO.Password),
             email = userTDO.Email
         };
 
