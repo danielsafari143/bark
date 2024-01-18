@@ -12,7 +12,7 @@ public class UserTasksContext: DbContext {
             @"Server=localhost;Port=5432;Database=TaskUser;Username=postgres;Password=safari");
     }
 
-    public DbSet<UserTask> tasks{get;set;}
+    public DbSet<UserTask> userTasks {get;set;}
     public DbSet<User> users{get;set;}
     
 }

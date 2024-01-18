@@ -11,12 +11,12 @@ namespace UserTasks.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class UserTasks : ControllerBase
+public class UserController : ControllerBase
 {
     private TasksRepository repository;
     private HashedPassword hashedPassword;
 
-    public UserTasks(TasksRepository repository , HashedPassword hashedPassword)
+    public UserController(TasksRepository repository , HashedPassword hashedPassword)
     {
         this.repository = repository;
         this.hashedPassword = hashedPassword;
@@ -41,7 +41,7 @@ public class UserTasks : ControllerBase
             Password = hashedPassword.hashedpassword(userTDO.Password),
             email = userTDO.Email
         };
-        Console.WriteLine(hashedPassword.Decode(user.Password, userTDO.Password));
+        
         await repository.CreateUserAsync(user);
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
     }
