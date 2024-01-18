@@ -17,15 +17,15 @@ public class TasksRepository {
         return await context.users.ToListAsync<User>();
     }
     
-    public async Task CreateUserAsync(UserDTO userDTO) {
-        var user = new User
-        {
-            username = userDTO.Username,
-            Password = userDTO.Password,
-            email = userDTO.Email
-        };
+    public async Task CreateUserAsync(User userDTO) {
+        // var user = new User
+        // {
+        //     username = userDTO.Username,
+        //     Password = userDTO.Password,
+        //     email = userDTO.Email
+        // };
 
-        context.users.Add(user);
+        context.users.Add(userDTO);
         await context.SaveChangesAsync();
     }
 }
