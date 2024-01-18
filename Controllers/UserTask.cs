@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using UserTasks.Models.User;
+using UserTasks.tasksServices;
 
 namespace UserTasks.Controllers;
 
@@ -7,15 +9,18 @@ namespace UserTasks.Controllers;
 [ApiController]
 public class UserTasks : ControllerBase
 {
-    //private readonly ILogger<WeatherForecastController> _logger;
+    private TasksRepository repository;
 
-    public UserTasks()
+    public UserTasks(TasksRepository repository)
     {
+        this.repository = repository;
     }
 
     [HttpGet]
-    public string Get()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<List<User>> Get()
     {
-        return "Hello Wolrd";
+        return await repository.GetUsersAsync();
     }
 }
