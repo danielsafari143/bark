@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using user.tdo;
 using UserTasks.Models.User;
@@ -6,6 +7,7 @@ using UserTasks.tasksServices;
 namespace UserTasks.Controllers;
 
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class UserTasks : ControllerBase
