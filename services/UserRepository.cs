@@ -46,4 +46,20 @@ public class UserRepository {
         context.SaveChanges();
         return user;
     }
+
+    public async Task<User> update (User updatedUser) {
+        User user = await context.users.SingleAsync(a => a.ID == updatedUser.ID);
+
+        User userDTO = new User{
+            username= updatedUser.username,
+            email = updatedUser.email,
+            Password = updatedUser.Password
+        };
+        user.username = userDTO.username;
+        user.email = userDTO.email;
+        user.Password = userDTO.Password;
+
+        context.SaveChanges();
+        return await Task.FromResult(user);
+    }
 } 
