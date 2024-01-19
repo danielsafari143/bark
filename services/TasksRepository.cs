@@ -52,17 +52,11 @@ public class TasksRepository {
     public async Task<UserTask> update (UserTask task) {
         UserTask userTask = await context.userTasks.SingleAsync(a => a.ID == task.ID);
 
-        TaskDTO taskDTO = new UserTask{
-            Title = userTask.Title,
-            Description = userTask.Description,
-            UserID = userTask.UserID,
-            CreatedOn = userTask.CreatedOn
-        };
 
-        userTask.Title = taskDTO.Title;
-         userTask.Description = taskDTO.Description;
-         userTask.UserID = taskDTO.UserID;
-         userTask.CreatedOn = taskDTO.CreatedOn;
+        userTask.Title = userTask.Title;
+         userTask.Description = userTask.Description;
+         userTask.UserID = userTask.UserID;
+         userTask.CreatedOn = userTask.CreatedOn;
 
         context.SaveChanges();
         return await Task.FromResult(userTask);

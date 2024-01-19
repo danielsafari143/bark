@@ -65,7 +65,7 @@ public class TaskController : ControllerBase
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task <UserTask> update(UserTask userTask) {
+    public async Task <UserTask> updated(UserTask userTask) {
 
         UserTask task = await repository.update(userTask);
         return task;
