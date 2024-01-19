@@ -8,7 +8,7 @@ using UserTasks.UserServices;
 namespace UserTasks.Controllers;
 
 
-
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase

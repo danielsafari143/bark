@@ -13,6 +13,8 @@ public class UserTask
      public int UserID{set;get;}
      [Required]
      public DateTime CreatedOn { get; set; }
+    
+     List<UserTask>? tasks{ get; set;}
 
 }
 

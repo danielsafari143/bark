@@ -8,8 +8,7 @@ public class UserTasksContext: DbContext {
     public UserTasksContext(DbContextOptions options):base(options){}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(
-            @"Server=localhost;Port=5432;Database=tasksList;Username=postgres;Password=safari");
+        optionsBuilder.UseNpgsql(@Environment.GetEnvironmentVariable("path"));
     }
 
 

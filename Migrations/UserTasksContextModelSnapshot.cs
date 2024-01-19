@@ -82,7 +82,7 @@ namespace UserTasks.Migrations
             modelBuilder.Entity("UserTasks.Models.Tasks.UserTask", b =>
                 {
                     b.HasOne("UserTasks.Models.User.User", null)
-                        .WithMany("userTasks")
+                        .WithMany("Tasks")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -90,7 +90,7 @@ namespace UserTasks.Migrations
 
             modelBuilder.Entity("UserTasks.Models.User.User", b =>
                 {
-                    b.Navigation("userTasks");
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

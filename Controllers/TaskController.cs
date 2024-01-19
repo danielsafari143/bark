@@ -8,7 +8,7 @@ using UserTasks.UserServices;
 
 namespace UserTasks.Controllers;
 
-
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class TaskController : ControllerBase
@@ -40,7 +40,7 @@ public class TaskController : ControllerBase
         {
             Title = taskDTO.Title,
             Description = taskDTO.Description,
-            ID = taskDTO.UserID,
+            UserID = taskDTO.UserID,
             CreatedOn = taskDTO.CreatedOn
         };
       

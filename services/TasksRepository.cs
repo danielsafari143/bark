@@ -21,6 +21,8 @@ public class TasksRepository {
     }
     
     public async Task<UserTask> CreateUserAsync(UserTask userTask) {
+        User user = await context.users.SingleAsync(a => a.ID == userTask.UserID);
+        user.Tasks.Add(userTask);
         context.userTasks.Add(userTask);
         await context.SaveChangesAsync();
         return userTask;
@@ -51,7 +53,6 @@ public class TasksRepository {
 
     public async Task<UserTask> update (UserTask task) {
         UserTask userTask = await context.userTasks.SingleAsync(a => a.ID == task.ID);
-
 
         userTask.Title = userTask.Title;
          userTask.Description = userTask.Description;
