@@ -61,4 +61,10 @@ public class UserController : ControllerBase
         User user = await repository.delete(id);
         return user == null? NotFound():NoContent();
     }
+
+    [HttpPut("{id}")]
+    public async Task <User> update(User user) {
+        User prUser = await repository.update(user);
+        return prUser;
+    }
 }
