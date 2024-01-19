@@ -63,8 +63,9 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task <User> update(User user) {
-        User prUser = await repository.update(user);
+    public async Task <User> update(User? user , int id) {
+
+        User prUser = await repository.update(await repository.findOne(id));
         return prUser;
     }
 }

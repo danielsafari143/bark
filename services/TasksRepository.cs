@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using UserTasks.db;
 using UserTasks.Models.Tasks;
 using UserTasks.Models.User;
+using UserTasks.task.tdo;
+using UserTasks.user.tdo;
 
 namespace UserTasks.tasksServices;
 
@@ -47,4 +49,22 @@ public class TasksRepository {
         return task;
     }
 
+    public async Task<UserTask> update (UserTask task) {
+        UserTask userTask = await context.userTasks.SingleAsync(a => a.ID == task.ID);
+
+        TaskDTO taskDTO = new UserTask{
+            Title = userTask.Title,
+            Description = userTask.Description,
+            UserID = userTask.UserID,
+            CreatedOn = userTask.CreatedOn
+        };
+
+        userTask.Title = taskDTO.Title;
+         userTask.Description = taskDTO.Description;
+         userTask.UserID = taskDTO.UserID;
+         userTask.CreatedOn = taskDTO.CreatedOn;
+
+        context.SaveChanges();
+        return await Task.FromResult(userTask);
+    }
 }

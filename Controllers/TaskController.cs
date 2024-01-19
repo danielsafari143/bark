@@ -56,19 +56,19 @@ public class TaskController : ControllerBase
         return task == null? NotFound() : task;
     }
 
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeleteUser(long id)
-    // {
-    //     var todoItem = repository.delete()
-    //     if (todoItem == null)
-    //     {
-    //         return NotFound();
-    //     }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTask(int id)
+    {
+        UserTask user = await repository.delete(id);
+        return user == null? NotFound():NoContent();
+    }
 
-    //     _context.TodoItems.Remove(todoItem);
-    //     await _context.SaveChangesAsync();
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task <UserTask> update(UserTask userTask) {
 
-    //     return NoContent();
-    // }
+        UserTask task = await repository.update(userTask);
+        return task;
+    }
 
 }
