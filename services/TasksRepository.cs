@@ -40,4 +40,11 @@ public class TasksRepository {
         return  await context.userTasks.FindAsync(id);
     } 
 
+    public async Task<UserTask> delete(int id) {
+        UserTask task = await findOne(id);
+        context.Remove(await context.userTasks.SingleAsync(a => a.ID == id));
+        context.SaveChanges();
+        return task;
+    }
+
 }

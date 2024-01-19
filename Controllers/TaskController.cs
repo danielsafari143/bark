@@ -56,4 +56,19 @@ public class TaskController : ControllerBase
         return task == null? NotFound() : task;
     }
 
+    // [HttpDelete("{id}")]
+    // public async Task<IActionResult> DeleteUser(long id)
+    // {
+    //     var todoItem = repository.delete()
+    //     if (todoItem == null)
+    //     {
+    //         return NotFound();
+    //     }
+
+    //     _context.TodoItems.Remove(todoItem);
+    //     await _context.SaveChangesAsync();
+
+    //     return NoContent();
+    // }
+
 }

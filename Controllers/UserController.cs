@@ -54,4 +54,11 @@ public class UserController : ControllerBase
         User user = await repository.findOne(id);
         return user == null? NotFound() : user;
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        User user = await repository.delete(id);
+        return user == null? NotFound():NoContent();
+    }
 }
