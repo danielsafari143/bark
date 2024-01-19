@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using user.tdo;
 using UserTasks.db;
 using UserTasks.Models.Tasks;
+using UserTasks.Models.User;
 
 namespace UserTasks.UserServices;
+
 
 public class UserRepository {
 
@@ -13,8 +14,29 @@ public class UserRepository {
         this.context = context;
     }
 
-    [HttpGet]
-    public async Task<List<UserTask>> GetTaskAsync () {
-        return await context.userTasks.ToListAsync();
+    public async Task<List<User>> GetUsersAsync () {
+        return await context.users.ToListAsync<User>();
     }
+    
+    public async Task<User> CreateUserAsync(User userDTO) {
+        context.users.Add(userDTO);
+        await context.SaveChangesAsync();
+        return userDTO;
+    }
+
+    public async Task<User> GetUserAsync(string email){
+       try
+       {
+         return await context.users.SingleOrDefaultAsync(data => data.email == email);
+       }
+       catch (System.Exception e)
+       {
+        
+            throw e;
+       }
+    }
+
+    public async Task<User> findOne (int id) {
+        return  await context.users.FindAsync(id);
+    } 
 }

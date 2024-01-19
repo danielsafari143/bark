@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using password.hashedpassword;
-using user.tdo;
 using UserTasks.Models.User;
-using UserTasks.tasksServices;
+using UserTasks.user.tdo;
+using UserTasks.UserServices;
 
 namespace UserTasks.Controllers;
 
 
-[Authorize]
+
 [Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
-    private TasksRepository repository;
+    private UserRepository repository;
     private HashedPassword hashedPassword;
 
-    public UserController(TasksRepository repository , HashedPassword hashedPassword)
+    public UserController(UserRepository repository , HashedPassword hashedPassword)
     {
         this.repository = repository;
         this.hashedPassword = hashedPassword;
@@ -31,6 +31,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     [Consumes("application/json")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(UserDTO userTDO)
@@ -44,5 +45,13 @@ public class UserController : ControllerBase
         
         await repository.CreateUserAsync(user);
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<User>> GetOneUser(int id)
+    {
+        User user = await repository.findOne(id);
+        return user == null? NotFound() : user;
     }
 }

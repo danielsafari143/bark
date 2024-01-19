@@ -1,10 +1,11 @@
+using Azure.Messaging;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using password.hashedpassword;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using UserTasks.tasksServices;
+using UserTasks.UserServices;
 
 namespace JwtInDotnetCore.Controllers
 {
@@ -14,25 +15,20 @@ namespace JwtInDotnetCore.Controllers
     {
         private IConfiguration _config;
         private HashedPassword password;
-        private readonly TasksRepository taskRepository;
+        private readonly UserRepository userRepository;
 
-        public LoginController(IConfiguration config , HashedPassword password, TasksRepository tasksRepository) 
+        public LoginController(IConfiguration config , HashedPassword password, UserRepository userRepository) 
         {
             _config = config;
             this.password = password;
-            this.taskRepository = tasksRepository;
+            this.userRepository = userRepository;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LoginRequest loginRequest)
         {
-                var user = await taskRepository.GetUserAsync(loginRequest.Email);
+                var user = await userRepository.GetUserAsync(loginRequest.Email);
                 bool check = password.Decode(user.Password, loginRequest.Password);
-
-                if(check) {
-                    return null;
-                }
-                 
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -44,7 +40,7 @@ namespace JwtInDotnetCore.Controllers
 
                 var token =  new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-                return Ok(token);
+                return check?Ok(token) : BadRequest("Wrong email or poassword");
 
         }
     }

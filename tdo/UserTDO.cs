@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace user.tdo;
+namespace UserTasks.user.tdo;
 
 public record UserDTO( 
     [Required][StringLength(50, MinimumLength = 2)] 
