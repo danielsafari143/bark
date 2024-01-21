@@ -7,7 +7,6 @@ namespace UserTasks.tasksServices;
 
 public class TasksRepository
 {
-
     private UserTasksContext context;
     public TasksRepository(UserTasksContext context)
     {
