@@ -1,10 +1,11 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UserTasks.Models.Tasks;
 
 namespace UserTasks.Models.User;
 
-public class User
+public class Users
 {
     public int ID{set;get;}
 
@@ -16,5 +17,5 @@ public class User
     [PasswordPropertyText]
     public required string  Password {set;get;}
 
-    public List<UserTask> Tasks {get;} = new List<UserTask>(); 
+    public ICollection<UserTask> Tasks {get;set;} = new List<UserTask>();
 }

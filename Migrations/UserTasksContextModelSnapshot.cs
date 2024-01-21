@@ -30,30 +30,31 @@ namespace UserTasks.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime>("EnDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
-                    b.Property<int>("UserID")
+                    b.Property<int?>("UsersId")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("userTasks");
                 });
 
-            modelBuilder.Entity("UserTasks.Models.User.User", b =>
+            modelBuilder.Entity("UserTasks.Models.User.Users", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -81,14 +82,14 @@ namespace UserTasks.Migrations
 
             modelBuilder.Entity("UserTasks.Models.Tasks.UserTask", b =>
                 {
-                    b.HasOne("UserTasks.Models.User.User", null)
+                    b.HasOne("UserTasks.Models.User.Users", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserTasks.Models.User.User", b =>
+            modelBuilder.Entity("UserTasks.Models.User.Users", b =>
                 {
                     b.Navigation("Tasks");
                 });

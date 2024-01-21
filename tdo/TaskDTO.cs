@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UserTasks.Models.Tasks;
 using UserTasks.Models.User;
 
@@ -15,4 +16,4 @@ public record TaskDTO(
     int UserID,
 
     [Required]
-    DateTime CreatedOn);
+    DateTime EndDate);

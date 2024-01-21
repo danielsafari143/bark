@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace UserTasks.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initia : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,24 +35,24 @@ namespace UserTasks.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    UserID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UsersId = table.Column<int>(type: "integer", nullable: false),
+                    EnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_userTasks", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_userTasks_users_UserID",
-                        column: x => x.UserID,
+                        name: "FK_userTasks_users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_userTasks_UserID",
+                name: "IX_userTasks_UsersId",
                 table: "userTasks",
-                column: "UserID");
+                column: "UsersId");
         }
 
         /// <inheritdoc />

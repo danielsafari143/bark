@@ -5,13 +5,16 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using password.hashedpassword;
 using UserTasks.UserServices;
+using Microsoft.EntityFrameworkCore.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 //jwt configuration 
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
-// Add services to the container.
+//var conf = builder.Configuration.GetConnectionString("str");
 
+// Add services to the container.
+//Env
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
  {

@@ -21,14 +21,12 @@ public class TasksRepository {
     }
     
     public async Task<UserTask> CreateUserAsync(UserTask userTask) {
-        User user = await context.users.SingleAsync(a => a.ID == userTask.UserID);
-        user.Tasks.Add(userTask);
         context.userTasks.Add(userTask);
         await context.SaveChangesAsync();
         return userTask;
     }
 
-    public async Task<User> GetUserAsync(string email){
+    public async Task<Users> GetUserAsync(string email){
        try
        {
          return await context.users.SingleOrDefaultAsync(data => data.email == email);
@@ -51,13 +49,13 @@ public class TasksRepository {
         return task;
     }
 
-    public async Task<UserTask> update (UserTask task) {
-        UserTask userTask = await context.userTasks.SingleAsync(a => a.ID == task.ID);
+    public async Task<UserTask> update (int id , TaskDTO taskDTO) {
+        UserTask userTask = await context.userTasks.SingleAsync(a => a.ID == id);
 
-        userTask.Title = userTask.Title;
-         userTask.Description = userTask.Description;
-         userTask.UserID = userTask.UserID;
-         userTask.CreatedOn = userTask.CreatedOn;
+        userTask.Title = taskDTO.Title;
+        userTask.Description = taskDTO.Description;
+        userTask.UsersId = taskDTO.UserID;
+        userTask.EnDate = userTask.EnDate;
 
         context.SaveChanges();
         return await Task.FromResult(userTask);

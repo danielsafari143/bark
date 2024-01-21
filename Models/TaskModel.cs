@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using UserTasks.Models.User;
 namespace UserTasks.Models.Tasks;
 
 public class UserTask
@@ -10,11 +12,9 @@ public class UserTask
      [Required][StringLength(500, MinimumLength = 5)]
      public required string Description{set;get;}
      [Required]
-     public int UserID{set;get;}
+     [ForeignKey("UsersId")]
+     public int? UsersId{set;get;}
      [Required]
-     public DateTime CreatedOn { get; set; }
-    
-     List<UserTask>? tasks{ get; set;}
-
+     public DateTime EnDate { get; set; }
 }
 

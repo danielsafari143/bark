@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using password.hashedpassword;
 using UserTasks.Models.Tasks;
+using UserTasks.Models.User;
 using UserTasks.task.tdo;
 using UserTasks.tasksServices;
 using UserTasks.UserServices;
@@ -16,11 +17,13 @@ public class TaskController : ControllerBase
     
     private TasksRepository repository;
     private HashedPassword hashedPassword;
+    private UserRepository userRepository1;
 
-    public TaskController(TasksRepository repository , HashedPassword hashedPassword)
+    public TaskController(TasksRepository repository , HashedPassword hashedPassword , UserRepository userRepository)
     {
         this.repository = repository;
         this.hashedPassword = hashedPassword;
+        this.userRepository1 = userRepository;
     }
 
     [HttpGet]
@@ -40,11 +43,16 @@ public class TaskController : ControllerBase
         {
             Title = taskDTO.Title,
             Description = taskDTO.Description,
-            UserID = taskDTO.UserID,
-            CreatedOn = taskDTO.CreatedOn
+            UsersId = taskDTO.UserID,
+            EnDate = taskDTO.EndDate
         };
-      
-        await repository.CreateUserAsync(task);
+         try
+         {
+             await repository.CreateUserAsync(task);
+         }catch {
+            
+            return NotFound(new {Message="There is no user with this id" , Id=taskDTO.UserID});
+         }
         return CreatedAtAction("GetTasks", new { ID = task }, task);
     }
 
@@ -52,8 +60,14 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<UserTask>> GetOneTask(int id)
     {
-        UserTask task = await repository.findOne(id);
-        return task == null? NotFound() : task;
+       try
+       {
+         UserTask task = await repository.findOne(id);
+         return task;
+       }catch{
+        
+         return NotFound(new {Message="There is no task with this id" , Id=id});
+       }
     }
 
     [HttpDelete("{id}")]
@@ -65,9 +79,9 @@ public class TaskController : ControllerBase
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task <UserTask> updated(UserTask userTask) {
+    public async Task <UserTask> updated(int id , TaskDTO taskDTO) {
 
-        UserTask task = await repository.update(userTask);
+        UserTask task = await repository.update(id , taskDTO);
         return task;
     }
 
