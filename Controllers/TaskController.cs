@@ -68,7 +68,6 @@ public class TaskController : ControllerBase
         }
         catch
         {
-
             return NotFound(new { Message = "There is no task with this id", Id = id });
         }
     }
