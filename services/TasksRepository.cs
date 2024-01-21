@@ -23,18 +23,6 @@ public class TasksRepository {
         return userTask;
     }
 
-    public async Task<Users> GetUserAsync(string email){
-       try
-       {
-         return await context.users.SingleOrDefaultAsync(data => data.email == email);
-       }
-       catch (System.Exception e)
-       {
-        
-            throw e;
-       }
-    }
-
     public async Task<UserTask> findOne (int id) {
         return  await context.userTasks.FindAsync(id);
     } 
