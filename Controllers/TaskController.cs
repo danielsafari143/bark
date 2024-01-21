@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using password.hashedpassword;
 using UserTasks.Models.Tasks;
-using UserTasks.Models.User;
 using UserTasks.task.tdo;
 using UserTasks.tasksServices;
 using UserTasks.UserServices;
@@ -73,16 +72,25 @@ public class TaskController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTask(int id)
     {
-        UserTask user = await repository.delete(id);
-        return user == null? NotFound():NoContent();
+        try{
+             UserTask user = await repository.delete(id);
+            return user == null? NotFound():NoContent();
+         }
+        catch{
+            return NotFound(new {Message="There is no task with this id" , Id=id});
+        }
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task <UserTask> updated(int id , TaskDTO taskDTO) {
-
-        UserTask task = await repository.update(id , taskDTO);
-        return task;
+    public async Task<ActionResult<UserTask>> updated(int id , TaskDTO taskDTO) {
+        try{
+            UserTask task = await repository.update(id , taskDTO);
+            return task;
+         }
+        catch{
+            return NotFound(new {Message="There is no task with this id" , Id=id});
+        }
     }
 
 }

@@ -44,7 +44,13 @@ public class UserController : ControllerBase
             Tasks = (ICollection<Models.Tasks.UserTask>)userTDO.Tasks 
         };
         
-        await repository.CreateUserAsync(user);
+        try
+        {
+            await repository.CreateUserAsync(user);
+        }
+        catch  {
+            return Conflict(new {Message = "Email already exists"});
+        }
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
     }
 

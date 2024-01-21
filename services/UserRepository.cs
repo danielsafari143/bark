@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using password.hashedpassword;
 using UserTasks.db;
-using UserTasks.Models.Tasks;
 using UserTasks.Models.User;
 
 namespace UserTasks.UserServices;
@@ -31,23 +29,16 @@ public class UserRepository {
         }
         return user;
     }
+
+     public async Task<Users> GetUserAsync(string email){
+        return await context.users.SingleAsync(data => data.email == email);
+    }
     
     public async Task<Users> CreateUserAsync(Users userDTO) {
+        await GetUserAsync(userDTO.email);
         context.users.Add(userDTO);
         await context.SaveChangesAsync();
         return userDTO;
-    }
-
-    public async Task<Users> GetUserAsync(string email){
-       try
-       {
-         return await context.users.SingleOrDefaultAsync(data => data.email == email);
-       }
-       catch (System.Exception e)
-       {
-        
-            throw e;
-       }
     }
 
     public async Task<Users> findOne (int id) {
