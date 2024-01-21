@@ -3,11 +3,11 @@ using UserTasks.Models.Tasks;
 
 namespace UserTasks.user.tdo;
 
-public record UserDTO( 
-    [Required][StringLength(50, MinimumLength = 2)] 
-    string  Username, 
+public record UserDTO(
+    [Required][StringLength(50, MinimumLength = 2)]
+    string  Username,
 
-    [Required][StringLength(50, MinimumLength = 4)] 
+    [Required][StringLength(50, MinimumLength = 4)]
     string Password,
 
     UserTask? Tasks,

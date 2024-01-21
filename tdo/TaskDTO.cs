@@ -1,7 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using UserTasks.Models.Tasks;
-using UserTasks.Models.User;
 
 namespace UserTasks.task.tdo;
 
