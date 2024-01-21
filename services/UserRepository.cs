@@ -35,7 +35,6 @@ public class UserRepository {
     }
     
     public async Task<Users> CreateUserAsync(Users userDTO) {
-        await GetUserAsync(userDTO.email);
         context.users.Add(userDTO);
         await context.SaveChangesAsync();
         return userDTO;

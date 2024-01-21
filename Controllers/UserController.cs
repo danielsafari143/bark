@@ -46,11 +46,14 @@ public class UserController : ControllerBase
         
         try
         {
-            await repository.CreateUserAsync(user);
+            await repository.GetUserAsync(userTDO.Email);
         }
-        catch  {
-            return Conflict(new {Message = "Email already exists"});
+        catch (InvalidOperationException e){
+            if(e.Message == "Sequence contains more than one element."){
+                return Conflict(new {Message = "Email already exists!"});
+            }   
         }
+        await repository.CreateUserAsync(user);
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
     }
 
