@@ -16,7 +16,7 @@ public class UserController : ControllerBase
     private UserRepository repository;
     private HashedPassword hashedPassword;
 
-    public UserController(UserRepository repository , HashedPassword hashedPassword)
+    public UserController(UserRepository repository, HashedPassword hashedPassword)
     {
         this.repository = repository;
         this.hashedPassword = hashedPassword;
@@ -36,22 +36,24 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(UserDTO userTDO)
     {
-         var user = new Users
+        var user = new Users
         {
             username = userTDO.Username,
             Password = hashedPassword.hashedpassword(userTDO.Password),
             email = userTDO.Email,
-            Tasks = (ICollection<Models.Tasks.UserTask>)userTDO.Tasks 
+            Tasks = (ICollection<Models.Tasks.UserTask>)userTDO.Tasks
         };
-        
+
         try
         {
             await repository.GetUserAsync(userTDO.Email);
         }
-        catch (InvalidOperationException e){
-            if(e.Message == "Sequence contains more than one element."){
-                return Conflict(new {Message = "Email already exists!"});
-            }   
+        catch (InvalidOperationException e)
+        {
+            if (e.Message == "Sequence contains more than one element.")
+            {
+                return Conflict(new { Message = "Email already exists!" });
+            }
         }
         await repository.CreateUserAsync(user);
         return CreatedAtAction("GetUser", new { id = user.ID }, user);
@@ -63,12 +65,12 @@ public class UserController : ControllerBase
     {
         try
         {
-             Users user = await repository.findOne(id);
-             return user;
+            Users user = await repository.findOne(id);
+            return user;
         }
-        catch  {
-            
-           return NotFound(new {Message="There is no user with this id" , Id=id});
+        catch
+        {
+            return NotFound(new { Message = "There is no user with this id", Id = id });
         }
     }
 
@@ -77,25 +79,26 @@ public class UserController : ControllerBase
     {
         try
         {
-             Users user = await repository.delete(id);
-             return Accepted(new {Message = "User deleted succefully" });
+            Users user = await repository.delete(id);
+            return Accepted(new { Message = "User deleted succefully" });
         }
-        catch {
-            
-            return NotFound(new {Message= "There is no user with this id" , id});
+        catch
+        {
+            return NotFound(new { Message = "There is no user with this id", id });
         }
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Users>> update(int id , Users users) {
+    public async Task<ActionResult<Users>> update(int id, Users users)
+    {
         try
         {
-             Users prUser = await repository.update(id , users);
-             return CreatedAtAction("GetOneUser", new { id = prUser.ID }, prUser);
+            Users prUser = await repository.update(id, users);
+            return CreatedAtAction("GetOneUser", new { id = prUser.ID }, prUser);
         }
-        catch{
-            
-            return NotFound(new {Message="There is no user with this id" , Id=id});
+        catch
+        {
+            return NotFound(new { Message = "There is no user with this id", Id = id });
         }
     }
 }

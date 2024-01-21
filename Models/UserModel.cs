@@ -7,15 +7,15 @@ namespace UserTasks.Models.User;
 
 public class Users
 {
-    public int ID{set;get;}
+    public int ID { set; get; }
 
     [StringLength(50, MinimumLength = 2)]
-    public required string username{set;get;}
+    public required string username { set; get; }
 
     [EmailAddress]
-    public required string email {set;get;}
+    public required string email { set; get; }
     [PasswordPropertyText]
-    public required string  Password {set;get;}
+    public required string Password { set; get; }
 
-    public ICollection<UserTask> Tasks {get;set;} = new List<UserTask>();
+    public ICollection<UserTask> Tasks { get; set; } = new List<UserTask>();
 }
