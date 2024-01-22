@@ -201,7 +201,7 @@ You can deploy this project using:
 
 ## 🚀 Future Features <a name="future-features"></a>
 
-- _Integrate a rating feature to allow users give ratings to booked Vespas._
+- _Build the frontend part._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
