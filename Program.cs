@@ -7,7 +7,6 @@ using password.hashedpassword;
 using UserTasks.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
-var movieApiKey = builder.Configuration["Movies:ConnectionString"];
 
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();

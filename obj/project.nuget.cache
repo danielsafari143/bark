@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y1ibTyDmoHx643+xnVyae5y+ozFe4xWW1MJIYfe3MftvRs1mFhQpyNimsfqrUpocmZk7Caa37MwiI8C5sAywoQ==",
+  "dgSpecHash": "A9zMSBMBGw1FnhBfHI4e26GCtiC4O8WvLYGd0rf/MOawI5S1gaH79poTcEaqjG9+n3UzXVzPlIUGwJPDTdtiIw==",
   "success": true,
-  "projectFilePath": "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
+  "projectFilePath": "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
