@@ -13,13 +13,13 @@ namespace UserTasks.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-	private UserRepository repository;
-	private HashedPassword hashedPassword;
+	private UserRepository _repository;
+	private HashedPassword _hashedPassword;
 
 	public UserController(UserRepository repository, HashedPassword hashedPassword)
 	{
-		this.repository = repository;
-		this.hashedPassword = hashedPassword;
+		_repository = repository;
+		_hashedPassword = hashedPassword;
 	}
 
 	[HttpGet]
@@ -27,7 +27,7 @@ public class UserController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<List<Users>> GetUser()
 	{
-		return await repository.GetUsersAsync();
+		return await _repository.GetUsersAsync();
 	}
 
 	[HttpPost]
@@ -39,14 +39,14 @@ public class UserController : ControllerBase
 		var user = new Users
 		{
 			username = userTDO.Username,
-			Password = hashedPassword.hashedpassword(userTDO.Password),
+			Password = _hashedPassword.hashedpassword(userTDO.Password),
 			email = userTDO.Email,
 			Tasks = (ICollection<Models.Tasks.UserTask>)userTDO.Tasks
 		};
 
 		try
 		{
-			await repository.GetUserAsync(userTDO.Email);
+			await _repository.GetUserAsync(userTDO.Email);
 		}
 		catch (InvalidOperationException e)
 		{
@@ -54,7 +54,7 @@ public class UserController : ControllerBase
 			{
 				return Conflict(new { Message = "Email already exists!" });
 			}
-			await repository.CreateUserAsync(user);
+			await _repository.CreateUserAsync(user);
 			return CreatedAtAction("GetUser", new { id = user.ID }, user);
 		}
 		return Conflict(new { Message = "Email already exists!" });
@@ -66,7 +66,7 @@ public class UserController : ControllerBase
 	{
 		try
 		{
-			Users user = await repository.findOne(id);
+			Users user = await _repository.findOne(id);
 			return user;
 		}
 		catch
@@ -80,7 +80,7 @@ public class UserController : ControllerBase
 	{
 		try
 		{
-			Users user = await repository.delete(id);
+			Users user = await _repository.delete(id);
 			return Accepted(new { Message = "User deleted succefully" });
 		}
 		catch
@@ -94,7 +94,7 @@ public class UserController : ControllerBase
 	{
 		try
 		{
-			Users prUser = await repository.update(id, users);
+			Users prUser = await _repository.update(id, users);
 			return CreatedAtAction("GetOneUser", new { id = prUser.ID }, prUser);
 		}
 		catch

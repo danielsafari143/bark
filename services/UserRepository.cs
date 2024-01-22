@@ -9,19 +9,19 @@ namespace UserTasks.UserServices;
 public class UserRepository
 {
 
-    private UserTasksContext context;
-    private HashedPassword hashpassword;
+    private UserTasksContext _context;
+    private HashedPassword _hashpassword;
 
     public UserRepository(UserTasksContext context, HashedPassword hashedPassword)
     {
-        this.context = context;
-        this.hashpassword = hashedPassword;
+        _context = context;
+        _hashpassword = hashedPassword;
     }
 
     public async Task<List<Users>> GetUsersAsync()
     {
-        var user = await context.users.ToListAsync<Users>();
-        var tasks = await context.userTasks.ToListAsync();
+        var user = await _context.users.ToListAsync<Users>();
+        var tasks = await _context.userTasks.ToListAsync();
         foreach (var userItem in user)
         {
             foreach (var item in tasks)
@@ -37,20 +37,20 @@ public class UserRepository
 
     public async Task<Users> GetUserAsync(string email)
     {
-        return await context.users.SingleAsync(data => data.email == email);
+        return await _context.users.SingleAsync(data => data.email == email);
     }
 
     public async Task<Users> CreateUserAsync(Users userDTO)
     {
-        context.users.Add(userDTO);
-        await context.SaveChangesAsync();
+        _context.users.Add(userDTO);
+        await _context.SaveChangesAsync();
         return userDTO;
     }
 
     public async Task<Users> findOne(int id)
     {
-        Users user = await context.users.SingleAsync(a => a.ID == id);
-        var tasks = await context.userTasks.ToListAsync();
+        Users user = await _context.users.SingleAsync(a => a.ID == id);
+        var tasks = await _context.userTasks.ToListAsync();
         foreach (var item in tasks)
         {
             if (item.UsersId == id)
@@ -64,27 +64,27 @@ public class UserRepository
     public async Task<Users> delete(int id)
     {
         Users user = await findOne(id);
-        context.Remove(await context.users.SingleAsync(a => a.ID == id));
-        context.SaveChanges();
+        _context.Remove(await _context.users.SingleAsync(a => a.ID == id));
+        _context.SaveChanges();
         return user;
     }
 
     public async Task<Users> update(int id, Users updatedUser)
     {
-        Users user = await context.users.SingleAsync(a => a.ID == id);
+        Users user = await _context.users.SingleAsync(a => a.ID == id);
 
         Users userDTO = new Users
         {
             username = updatedUser.username,
             email = updatedUser.email,
-            Password = hashpassword.hashedpassword(updatedUser.Password),
+            Password = _hashpassword.hashedpassword(updatedUser.Password),
         };
 
         user.username = userDTO.username;
         user.email = userDTO.email;
         user.Password = userDTO.Password;
 
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
         return await Task.FromResult(user);
     }
 }
