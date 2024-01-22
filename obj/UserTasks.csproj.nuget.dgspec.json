@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj": {}
+    "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj": {
+    "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
+        "projectUniqueName": "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
         "projectName": "UserTasks",
-        "projectPath": "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
+        "projectPath": "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\UserTasks.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\obj\\",
+        "outputPath": "c:\\Users\\LENOVO\\it\\c#\\assess\\UserTasks\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",

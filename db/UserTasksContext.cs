@@ -11,7 +11,7 @@ public class UserTasksContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
-        optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=ded;Username=postgres;Password=safari");
+        optionsBuilder.UseNpgsql(@"");
     }
 
     public DbSet<UserTask> userTasks { get; set; }
