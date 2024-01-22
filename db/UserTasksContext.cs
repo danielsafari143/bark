@@ -15,7 +15,7 @@ public class UserTasksContext : DbContext
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 
-		optionsBuilder.UseNpgsql(@"");
+		optionsBuilder.UseNpgsql(@_databaseParams);
 	}
 
 	public DbSet<UserTask> userTasks { get; set; }
