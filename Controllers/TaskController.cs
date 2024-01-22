@@ -14,15 +14,15 @@ namespace UserTasks.Controllers;
 public class TaskController : ControllerBase
 {
 
-    private TasksRepository _repository;
-    private HashedPassword _hashedPassword;
-    private UserRepository _userRepository1;
+    private TasksRepository repository;
+    private HashedPassword hashedPassword;
+    private UserRepository userRepository1;
 
     public TaskController(TasksRepository repository, HashedPassword hashedPassword, UserRepository userRepository)
     {
-        _repository = repository;
-        _hashedPassword = hashedPassword;
-        _userRepository1 = userRepository;
+        this.repository = repository;
+        this.hashedPassword = hashedPassword;
+        this.userRepository1 = userRepository;
     }
 
     [HttpGet]
@@ -30,7 +30,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<List<UserTask>> GetTasks()
     {
-        return await _repository.GetTasksAsync();
+        return await repository.GetTasksAsync();
     }
 
     [HttpPost]
@@ -47,7 +47,7 @@ public class TaskController : ControllerBase
         };
         try
         {
-            await _repository.CreateUserAsync(task);
+            await repository.CreateUserAsync(task);
         }
         catch
         {
@@ -63,7 +63,7 @@ public class TaskController : ControllerBase
     {
         try
         {
-            UserTask task = await _repository.findOne(id);
+            UserTask task = await repository.findOne(id);
             return task;
         }
         catch
@@ -77,7 +77,7 @@ public class TaskController : ControllerBase
     {
         try
         {
-            UserTask user = await _repository.delete(id);
+            UserTask user = await repository.delete(id);
             return user == null ? NotFound() : NoContent();
         }
         catch
@@ -92,7 +92,7 @@ public class TaskController : ControllerBase
     {
         try
         {
-            UserTask task = await _repository.update(id, taskDTO);
+            UserTask task = await repository.update(id, taskDTO);
             return task;
         }
         catch

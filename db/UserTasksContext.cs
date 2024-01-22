@@ -6,15 +6,19 @@ namespace UserTasks.db;
 
 public class UserTasksContext : DbContext
 {
-    public UserTasksContext(DbContextOptions options) : base(options) { }
+    private string? _databaseParams;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+    public UserTasksContext(DbContextOptions options , IConfiguration configuration) : base(options) { 
+		_databaseParams = configuration["UserTasks:ConnectionString"];	
+	}
 
-        optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=ded;Username=postgres;Password=safari");
-    }
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
 
-    public DbSet<UserTask> userTasks { get; set; }
-    public DbSet<Users> users { get; set; }
+		optionsBuilder.UseNpgsql(@_databaseParams);
+	}
+
+	public DbSet<UserTask> userTasks { get; set; }
+	public DbSet<Users> users { get; set; }
 
 }
