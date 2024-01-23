@@ -45,7 +45,7 @@ public class TasksRepository
         userTask.Title = taskDTO.Title;
         userTask.Description = taskDTO.Description;
         userTask.UsersId = taskDTO.UserID;
-        userTask.EnDate = userTask.EnDate;
+        userTask.EnDate = taskDTO.EndDate;
 
         _context.SaveChanges();
         return await Task.FromResult(userTask);
