@@ -165,7 +165,9 @@ Install the project dependencies with:
 To run the project, execute the following command:
 
 ```
-  dotnet user-secrets set "UserTasks:ConnectionString" "Server=<name>;Port=<number>;Database=<name>;Username=<username>;Password=<passwrod>"
+  dotnet user-secrets set "UserTasks:ConnectionString" 
+  "Server=<value>;Port=Database=<value>;Username=<value>;Password=<value>"
+
   dotnet ef database update 
   dotnet watch
 ```
